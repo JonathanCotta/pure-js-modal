@@ -1,18 +1,17 @@
 function confirmation(selector, callback) {
+    const addClickEvent = (element, eventCallback) => document.querySelector(element).addEventListener("click", eventCallback);
 
-    document.querySelector(selector).addEventListener("click", confirmToggle); // abre o confirm
- 
-    document.querySelector("button[name='yes']").addEventListener("click", function () {
+    const confirmToggle = () => document.querySelector(".confirmation").classList.toggle("modal--show");
+
+    addClickEvent(selector, confirmToggle);
+
+    addClickEvent("button[name='yes']", () => {
         confirmToggle();
-        callback(true);       
+        callback(true);
     });
 
-    document.querySelector("button[name='no']").addEventListener("click", function () {
+    addClickEvent("button[name='no']", () => {
         confirmToggle();
-        callback(false);       
-    });
-
-    function confirmToggle() { // função para abrir e fechar confirm
-        return document.querySelector(".confirmation").classList.toggle("modal--show");
-    }
+        callback(false);
+    })
 }

@@ -1,17 +1,12 @@
 function modal(trigger) {
+    const modal = document.querySelector(".modal");
 
-    var md = document.querySelector(".modal");
+    const addClickEvent = (element, eventCallback) => document.querySelector(element).addEventListener("click", eventCallback);
 
-    document.querySelector(trigger).addEventListener("click", modalToggle);
+    const modalToggle = () => modal.classList.toggle("modal--show");
 
-    document.querySelector(".modal__close").addEventListener("click", modalToggle);
+    addClickEvent(trigger, modalToggle);
+    addClickEvent(".modal__close", modalToggle);
 
-    window.onclick = function (event) { 
-        if (event.target === md)
-            modalToggle();
-    };
-
-    function modalToggle() {
-        return md.classList.toggle("modal--show");
-    }
+    window.onclick = (event) => (event.target === modal) && modalToggle();
 }
